@@ -9,15 +9,15 @@ const map = (arr, callback) => {
 
 // .reduce()
 const reduce = (arr, callback, initialValue) => {
-    let accumulator = initialValue === undefined ? undefined : initialValue;
+    let acc = initialValue === undefined ? undefined : initialValue;
     for (let i = 0; i < arr.length; i++) {
-      if (accumulator !== undefined) {
-        accumulator = callback(accumulator, arr[i], i, arr);
+      if (acc !== undefined) {
+        acc = callback(acc, arr[i], i, arr)
       } else {
-        accumulator = arr[i];
+        acc = arr[i]
       }
     }
-    return accumulator;
+  return acc
 }
 
 // .filter()
@@ -34,30 +34,41 @@ const filter = (arr, callback) => {
 
 // Using custom functions
 
-// using custom .map() 
+const mapFunc = (arr) => {
+  return arr.map(item => item * 2)
+}
 
-const arr = [1, 2, 3, 4, 5]
+console.log(mapFunc([1, 2, 3, 4, 5]))
 
-const newArr = map(arr, (item) => {
-  return item * 2;
-})
 
-console.log(newArr) // [2, 4, 6, 8, 10] 
+const foodItems = [
+  {
+    name: 'pizza',
+    amount: 5
+  },
+  {
+    name: 'burger',
+    amount: 10
+  },
+  {
+    name: 'sushi',
+    amount: 20
+  }
+]
 
-// using custom .reduce()
-const arr2 = [1, 2, 3, 4, 5]
+const reduceFunc = (arr) => {
+  return arr.reduce((acc, item) => acc + item.amount, 0)
+}
 
-const sum = reduce(arr2, (acc, item) => {
-  return acc + item;
-})
+console.log(reduceFunc(foodItems))
 
-console.log(sum) // 15
+const filterFunc = (arr) => {
+  return arr.filter(arr => arr > 10)
+}
 
-// using custom .filter()
-const arr3 = [1, 2, 3, 4, 5]
+console.log(filterFunc([1, 7, 8, 9, 10, 14, 19, 22]))
 
-const filteredArr = filter(arr3, (item) => {
-  return item > 2;
-})
 
-console.log(filteredArr) // [3, 4, 5]
+
+
+
